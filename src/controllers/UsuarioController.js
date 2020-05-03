@@ -13,10 +13,10 @@ module.exports = {
         const res = await Usuario.create({nome, user, pass})
 
         if(res){
-            response.status(200).send({id:res.id})
+            response.status(200).send({ok:res.id})
             return
         }
-        response.status(400).send({erro: "Erro ao gravar usuario"})
+        response.status(400).send({error: "Erro ao gravar usuario"})
     },
 
     async update(request, response){

@@ -54,7 +54,7 @@ module.exports = {
         allowNull: true
       },
       entregue:{
-        type: Sequelize.BLOB('tiny'),
+        type: Sequelize.TINYINT,
         allowNull: true
       },
       created_at:{
