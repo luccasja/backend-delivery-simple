@@ -1,6 +1,31 @@
 const Usuario = require('../models/Usuario');
+const {Op} = require('sequelize')
 
 module.exports = {
+
+    async auth(request, response){
+        const {user, pass} = request.body
+        console.log(request.body)
+        const result = await Usuario.findAll({
+            where:{
+                user:{
+                    [Op.eq]:user
+                },
+                pass:{
+                    [Op.eq]:pass
+                }
+
+            }
+        })
+
+        if(result.length > 0){
+            response.status(200).send({Auth:true})
+            return
+        }
+
+        response.status(401).send({Auth:false})
+        return
+    },
 
     async read(request, response){
         const res = await Usuario.findAll()

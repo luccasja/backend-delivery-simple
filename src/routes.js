@@ -6,8 +6,8 @@ const ProdutoController = require('./controllers/ProdutoController')
 const PedidoController = require('./controllers/PedidoController')
 const ItemController = require('./controllers/ItemController')
 
-
 routes.get('/usuario', UsuarioController.read)
+routes.post('/usuario/auth', UsuarioController.auth)
 routes.post('/usuario', UsuarioController.insert)
 routes.put('/usuario/:id/update', UsuarioController.update)
 routes.delete('/usuario/:id', UsuarioController.delete)

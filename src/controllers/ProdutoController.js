@@ -6,7 +6,7 @@ module.exports ={
         const produto = await Produto.findAll()
 
         if(produto){
-            response.status(200).send({produto})
+            response.status(200).send(produto)
             return
         }
 
