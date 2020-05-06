@@ -8,7 +8,6 @@ class Item extends Model{
             valor_unitario: DataTypes.INTEGER,
             valor_total: DataTypes.DOUBLE,
             quantidade: DataTypes.INTEGER,
-            posicao: DataTypes.INTEGER,
             observacoes: DataTypes.STRING,
         },{
             sequelize: connection

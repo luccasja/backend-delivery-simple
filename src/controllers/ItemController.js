@@ -31,9 +31,31 @@ module.exports = {
         const {id} = request.params
         const itens = request.body
 
+        console.log('id_peido: '+id)
+        console.log(itens)
+
         let flag
         try {
             itens.forEach(async item => {
+                /*
+                switch (item) {
+                    case id === null:
+                        return response.status(400).send({error:"Id do Pedido não pode ser nulo!"})
+                    case item.id_produto === null:
+                        return response.status(400).send({error:"Id do Produto não pode ser nulo!"})
+                    case item.valor_unitario === null:
+                        return response.status(400).send({error:"Valor Unitário não pode ser nulo!"})
+                    case item.valor_total === null:
+                        return response.status(400).send({error:"Valor Total não pode ser nulo!"})
+                    case item.quantidade === null:
+                        return response.status(400).send({error:"Quantidade não pode ser nulo!"})
+                    case item.posicao === null:
+                        return response.status(400).send({error:"Posição não pode ser nulo!"})
+                    default:
+                        break;
+                }
+                */
+
                 await Item.create({
                     id_produto: item.id_produto, 
                     id_pedido: id, 

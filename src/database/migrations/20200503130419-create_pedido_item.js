@@ -13,14 +13,14 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references:{model: 'produtos', key: 'id'},
-        onUpdate: 'CASCADE',
+        onUpdate: 'NO ACTION',
         onDelete: 'RESTRICT'
       },
       id_pedido:{
         type: Sequelize.INTEGER,
         allowNull: false,
         references:{model: 'pedidos', key: 'id'},
-        onUpdate: 'CASCADE',
+        onUpdate: 'NO ACTION',
         onDelete: 'CASCADE'
       },
       valor_unitario:{
@@ -32,10 +32,6 @@ module.exports = {
         allowNull: false,
       },
       quantidade:{
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      posicao:{
         type: Sequelize.INTEGER,
         allowNull: false,
       },
