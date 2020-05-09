@@ -19,11 +19,12 @@ module.exports = {
         })
 
         if(result.length > 0){
-            response.status(200).send({Auth:true})
+            
+            response.status(200).send({autenticado: true})
             return
         }
 
-        response.status(401).send({Auth:false})
+        response.status(401).send("Usuario não autenticado")
         return
     },
 
