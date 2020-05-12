@@ -1,4 +1,5 @@
 const Pedido = require('../models/Pedido');
+const Item = require('../models/Item');
 const { Op } = require("sequelize");
 
 module.exports={
@@ -13,23 +14,34 @@ module.exports={
         response.status(400).send({error:"Erro ao ler Pedidos"})
     },
 
-    async readByDate(request, response){
-        const {data} = request.params
-        //2020-05-03T00:00:00.0Z
-        const pedidos = await Pedido.findAll({where:{created_at:{[Op.gte]:data}}})
+    async readByPk(request, response){
+        const {id} = request.params
+        const pedido = await Pedido.findByPk(id)
+        if(pedido !== null){
+            response.status(200).send(pedido)
+            return
+        }
+        response.status(200).send([])
+    },
 
-        if(pedidos){
+    async readByDate(request, response){
+        const {data_ini} = request.params
+        const {data_fim} = request.params
+        const pedidos = await Pedido.findAll({
+            //include:{association:'itens'},
+            where:{created_at:{[Op.gte]:data_ini,[Op.lte]:data_fim}}, 
+            order:[['id','DESC']]
+        })
+
+        if(pedidos !== null){
             response.status(200).send(pedidos)
             return
         }
-
-        response.status(400).send({error:"Erro ao ler Pedidos"})
-
+        response.status(200).send([])
     },
 
     async readByDateAll(request, response){
         const {data} = request.params
-        //2020-05-03T00:00:00.0Z
         const pedidos = await Pedido.findAll({where:{created_at:{[Op.gte]:data}}})
 
         if(pedidos){
@@ -132,4 +144,27 @@ module.exports={
 
         response.status(400).send({error:"Erro ao deletar pedido"})
     },
+
+
+    async registrarPedido(request, response){
+        const {id} = request.params
+        const pedido = await Pedido.update({entregue:1, dt_finalizacao:(new Date())},{where:{id}})
+
+        if(pedido > 0){
+            response.status(200).send({Ok:true})
+            return
+        }
+        response.status(200).send({Ok:false})
+    },
+
+    async reabrir(request, response){
+        const {id} = request.params
+        const pedido = await Pedido.update({entregue:0, dt_finalizacao:''},{where:{id}})
+
+        if(pedido > 0){
+            response.status(200).send({Ok:true})
+            return
+        }
+        response.status(200).send({Ok:false})
+    }
 }

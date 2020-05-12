@@ -1,4 +1,5 @@
 const Item = require('../models/Item')
+const Pedido = require('../models/Pedido')
 
 module.exports = {
     async read(request, response){
@@ -14,11 +15,12 @@ module.exports = {
 
     async readByPedido(request, response){
         const {id} = request.params
-        // params  :id 
-        // body  {nome:"thyaguingo", }
-
-        const item = await Item.findAll({where:{id_pedido:id}})
-
+        
+        const item = await Item.findAll({
+            where:{id_pedido:id},
+            include:[{association:'produto'}]
+        })
+        
         if(item){
             response.status(200).send(item)
             return
