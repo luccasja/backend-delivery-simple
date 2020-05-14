@@ -1,4 +1,5 @@
 const Produto = require('../models/Produto');
+const Item = require('../models/Item');
 
 module.exports ={
     async read(request, response){
@@ -13,10 +14,22 @@ module.exports ={
         response.status(400).send({error:"Erro ao listar produto"})
     },
 
-    async insert(request, response){
-        const {nome, descricao, valor_unitario, dir_name} = request.body;
+    async readAtivos(request, response){
 
-        const produto = await Produto.create({nome, descricao, valor_unitario, dir_name})
+        const produto = await Produto.findAll({where:{ativo:true}})
+
+        if(produto){
+            response.status(200).send(produto)
+            return
+        }
+
+        response.status(400).send({error:"Erro ao listar produto"})
+    },
+
+    async insert(request, response){
+        const {nome, descricao, valor_unitario, dir_name, ativo} = request.body;
+
+        const produto = await Produto.create({nome, descricao, valor_unitario, dir_name, ativo})
 
         if(produto){
             response.status(200).send({Ok:produto.id})
@@ -28,10 +41,10 @@ module.exports ={
 
     async update(request, response){
         const {id} = request.params
-        const {nome, descricao, valor_unitario, dir_name} = request.body;
+        const {nome, descricao, valor_unitario, dir_name, ativo} = request.body;
 
         const produto = await Produto.update(
-            {nome, descricao, valor_unitario, dir_name}, 
+            {nome, descricao, valor_unitario, dir_name, ativo}, 
             {where:{id}
         })
 
@@ -46,13 +59,18 @@ module.exports ={
     async delete(request, response){
         const {id} = request.params
 
-        const produto = await Produto.destroy({where:{id}})
+        const hasItensPedido = Item.findAll({where:{id_produto:id}})
+        if(hasItensPedido.length === 0){
+            const produto = await Produto.destroy({where:{id}})
 
-        if(produto > 0){
-            response.status(200).send({OK:true})
-            return
+            if(produto > 0){
+                response.status(200).send({Ok:true})
+                return
+            }
+
+            response.status(400).send({error:"Erro ao deletar produto"})
         }
 
-        response.status(400).send({error:"Erro ao deletar produto"})
+        response.status(200).send({Ok:false})
     }
 }

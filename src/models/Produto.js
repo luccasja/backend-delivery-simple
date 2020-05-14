@@ -6,6 +6,7 @@ class Produto extends Model{
             nome: DataTypes.STRING,
             descricao: DataTypes.STRING,
             valor_unitario: DataTypes.DOUBLE,
+            ativo: DataTypes.TINYINT,
             dir_img: DataTypes.STRING,
         },{
             sequelize: connection

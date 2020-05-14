@@ -25,6 +25,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true
       },
+      ativo:{
+        type: Sequelize.TINYINT,
+        allowNull: false
+      },
       created_at:{
         type: Sequelize.DATE,
         allowNull: false
