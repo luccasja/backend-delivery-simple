@@ -11,6 +11,7 @@ class Pedido extends Model{
             complemento_entrega: DataTypes.STRING,
             frm_pagamento: DataTypes.STRING,
             troco: DataTypes.DOUBLE,
+            frete: DataTypes.DOUBLE,
             valor_total: DataTypes.DOUBLE,
             qntd_item: DataTypes.INTEGER,
             dt_finalizacao: DataTypes.DATE,

@@ -41,6 +41,10 @@ module.exports = {
         type: Sequelize.DOUBLE,
         allowNull: true
       },
+      frete:{
+        type: Sequelize.DOUBLE,
+        allowNull: false
+      },
       valor_total:{
         type: Sequelize.STRING,
         allowNull: false

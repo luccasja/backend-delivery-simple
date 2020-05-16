@@ -1,5 +1,6 @@
 const Produto = require('../models/Produto');
 const Item = require('../models/Item');
+const { Op } = require("sequelize");
 
 module.exports ={
     async read(request, response){
@@ -22,14 +23,25 @@ module.exports ={
             response.status(200).send(produto)
             return
         }
+        response.status(200).send([])
+    },
 
-        response.status(400).send({error:"Erro ao listar produto"})
+    async readByName(request, response){
+        const {nome} = request.params
+        const query = '%'+nome+'%'
+        const produto = await Produto.findAll({where:{nome:{[Op.like]:query}}})
+
+        if(produto){
+            response.status(200).send(produto)
+            return
+        }
+        response.status(200).send([])
     },
 
     async readAtivos(request, response){
-
-        const produto = await Produto.findAll({where:{ativo:true}})
-
+        const {situacao} = request.params
+        const produto = await Produto.findAll({where:{ativo:{[Op.eq]:situacao}}})
+        console.log(produto)
         if(produto){
             response.status(200).send(produto)
             return
