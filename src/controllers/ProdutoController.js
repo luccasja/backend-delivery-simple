@@ -14,6 +14,18 @@ module.exports ={
         response.status(400).send({error:"Erro ao listar produto"})
     },
 
+    async readByPK(request, response){
+        const {id} = request.params
+        const produto = await Produto.findByPk(id)
+
+        if(produto){
+            response.status(200).send(produto)
+            return
+        }
+
+        response.status(400).send({error:"Erro ao listar produto"})
+    },
+
     async readAtivos(request, response){
 
         const produto = await Produto.findAll({where:{ativo:true}})
