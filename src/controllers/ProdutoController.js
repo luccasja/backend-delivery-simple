@@ -58,8 +58,7 @@ module.exports ={
 
     async delete(request, response){
         const {id} = request.params
-
-        const hasItensPedido = Item.findAll({where:{id_produto:id}})
+        const hasItensPedido = await Item.findAll({where:{id_produto:id}})
         if(hasItensPedido.length === 0){
             const produto = await Produto.destroy({where:{id}})
 
@@ -69,6 +68,7 @@ module.exports ={
             }
 
             response.status(400).send({error:"Erro ao deletar produto"})
+            return
         }
 
         response.status(200).send({Ok:false})
