@@ -57,6 +57,10 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: true
       },
+      recebido:{
+        type: Sequelize.TINYINT,
+        allowNull: true
+      },
       entregue:{
         type: Sequelize.TINYINT,
         allowNull: true

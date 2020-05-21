@@ -5,9 +5,11 @@ const Usuario = require ('../models/Usuario')
 const Produto = require ('../models/Produto')
 const Pedido = require ('../models/Pedido')
 const Item = require ('../models/Item')
+const Session = require ('../models/Session')
 
 const connection = new Sequelize(dbConfig);
 
+Session.init(connection)
 Usuario.init(connection)
 Produto.init(connection)
 Pedido.init(connection)

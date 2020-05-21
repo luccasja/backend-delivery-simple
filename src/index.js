@@ -1,14 +1,40 @@
 const express = require('express');
 const cors = require('cors');
 const routes = require('./routes')
-process.env.TZ = 'America/Sao_Paulo';
+const socketIO = require('socket.io')
+const http = require('http')
+
 const app = express()
 var corsOptions = {
-    origin: 'http://localhost:3000'
+    origin: 'https://www.finamassa.online'
 }
+const server = http.createServer(app)
 
-app.use(cors(corsOptions))
+const io = socketIO(server)
+
+var red, blue, reset
+red   = '\u001b[31m'
+blue  = '\u001b[34m'
+reset = '\u001b[0m'
+
+
+io.on('connection', socket =>{
+    console.log(blue+'usuario conectado'+reset)
+
+    socket.on('hasPedido', (information)=>{
+        console.log(blue+`informação recebida: ${information}`+reset)
+        if(information){
+            io.sockets.emit('hasPedido', information)
+        }
+    })
+
+    socket.on('disconnect', ()=>{
+        console.log(red+'Usuario desconectado'+reset)
+    })
+})
+
+app.use(cors())
 app.use(express.json())
 app.use(routes)
 
-app.listen(2525)
+server.listen(3000)

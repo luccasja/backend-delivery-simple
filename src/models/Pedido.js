@@ -15,7 +15,8 @@ class Pedido extends Model{
             valor_total: DataTypes.DOUBLE,
             qntd_item: DataTypes.INTEGER,
             dt_finalizacao: DataTypes.DATE,
-            entregue: DataTypes.BLOB,
+            recebido: DataTypes.TINYINT,
+            entregue: DataTypes.TINYINT,
         },{
             sequelize: connection
         })
