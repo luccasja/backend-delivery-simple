@@ -8,7 +8,7 @@ const ItemController = require('./controllers/ItemController')
 const SessionController = require('./controllers/SessionController')
 
 routes.get('/',(request, response)=>{
-    response.status(200).send('Seja bem-vindo ao Web Service Fina Massa')
+    response.status(200).send('Seja bem-vindo ao Web Service Fina Massa Homologação')
 })
 //routes.get('/usuario', UsuarioController.read)
 routes.post('/usuario/auth', UsuarioController.auth)
