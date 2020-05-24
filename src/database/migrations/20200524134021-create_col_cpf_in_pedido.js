@@ -7,7 +7,8 @@ module.exports = {
       'cpf',
       {
         type: Sequelize.STRING(11),
-        allowNull: false
+        allowNull: false,
+        after: "nome_cliente"
       }
     );
   },
