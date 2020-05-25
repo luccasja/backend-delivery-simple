@@ -4,6 +4,7 @@ class Pedido extends Model{
     static init(connection){
         super.init({
             nome_cliente: DataTypes.STRING,
+            cpf: DataTypes.STRING,
             telefone: DataTypes.STRING,
             endereco_entrega: DataTypes.STRING,
             numero_entrega: DataTypes.STRING,

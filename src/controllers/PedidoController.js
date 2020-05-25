@@ -50,6 +50,7 @@ module.exports={
     async insert(request, response){
         const {
             nome_cliente, 
+            cpf, 
             telefone, 
             endereco_entrega,
             numero_entrega, 
@@ -66,6 +67,7 @@ module.exports={
         } = request.body
         const pedido = await Pedido.create({
             nome_cliente, 
+            cpf, 
             telefone, 
             endereco_entrega,
             numero_entrega, 
@@ -91,6 +93,7 @@ module.exports={
         const {id} = request.params
         const {
             nome_cliente, 
+            cpf, 
             telefone, 
             endereco_entrega,
             numero_entrega, 
@@ -107,6 +110,7 @@ module.exports={
         } = request.body
         const pedido = await Pedido.update({
             nome_cliente, 
+            cpf, 
             telefone, 
             endereco_entrega,
             numero_entrega, 

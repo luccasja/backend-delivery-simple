@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false
       }, 
       telefone:{
-        type: Sequelize.STRING(14),
+        type: Sequelize.STRING(15),
         allowNull: false
       },
       endereco_entrega:{

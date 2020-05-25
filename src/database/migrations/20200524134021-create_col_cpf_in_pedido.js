@@ -6,8 +6,8 @@ module.exports = {
       'pedidos',
       'cpf',
       {
-        type: Sequelize.STRING(11),
-        allowNull: false,
+        type: Sequelize.STRING(14),
+        allowNull: true,
         after: "nome_cliente"
       }
     );
