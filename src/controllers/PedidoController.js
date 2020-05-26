@@ -1,9 +1,13 @@
 const Pedido = require('../models/Pedido');
-const Item = require('../models/Item');
 const { Op } = require("sequelize");
 
 module.exports={
     async read(request, response){
+        const {key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const pedido = await Pedido.findAll()
         if(pedido){
             response.status(200).send(pedido)
@@ -13,7 +17,11 @@ module.exports={
     },
 
     async readByPk(request, response){
-        const {id} = request.params
+        const {id, key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const pedido = await Pedido.findByPk(id)
         if(pedido !== null){
             response.status(200).send(pedido)
@@ -23,10 +31,12 @@ module.exports={
     },
 
     async readByDate(request, response){
-        const {data_ini} = request.params
-        const {data_fim} = request.params
+        const {data_ini, data_fim, key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const pedidos = await Pedido.findAll({
-            //include:{association:'itens'},
             where:{created_at:{[Op.gte]:data_ini,[Op.lte]:data_fim}}, 
             order:[['id','DESC']]
         })
@@ -38,7 +48,11 @@ module.exports={
     },
 
     async readByDateAll(request, response){
-        const {data} = request.params
+        const {data, key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const pedidos = await Pedido.findAll({where:{created_at:{[Op.gte]:data}}})
         if(pedidos){
             response.status(200).send(pedidos)
@@ -48,10 +62,16 @@ module.exports={
     },
 
     async insert(request, response){
+        const {key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const {
             nome_cliente, 
             cpf, 
-            telefone, 
+            telefone,
+            tipo_entrega, 
             endereco_entrega,
             numero_entrega, 
             bairro_entrega, 
@@ -68,7 +88,8 @@ module.exports={
         const pedido = await Pedido.create({
             nome_cliente, 
             cpf, 
-            telefone, 
+            telefone,
+            tipo_entrega, 
             endereco_entrega,
             numero_entrega, 
             bairro_entrega, 
@@ -90,11 +111,16 @@ module.exports={
     },
 
     async update(request, response){
-        const {id} = request.params
+        const {id, key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const {
             nome_cliente, 
             cpf, 
-            telefone, 
+            telefone,
+            tipo_entrega, 
             endereco_entrega,
             numero_entrega, 
             bairro_entrega, 
@@ -111,7 +137,8 @@ module.exports={
         const pedido = await Pedido.update({
             nome_cliente, 
             cpf, 
-            telefone, 
+            telefone,
+            tipo_entrega, 
             endereco_entrega,
             numero_entrega, 
             bairro_entrega, 
@@ -134,7 +161,11 @@ module.exports={
     },
 
     async delete(request, response){
-        const {id} = request.params
+        const {id, key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const pedido = await Pedido.destroy({where:{id}})
         if(pedido > 0){
             response.status(200).send({OK:true})
@@ -145,7 +176,11 @@ module.exports={
 
 
     async registrarPedido(request, response){
-        const {id} = request.params
+        const {id, key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const pedido = await Pedido.update({entregue:1, dt_finalizacao:(new Date())},{where:{id}})
         if(pedido > 0){
             response.status(200).send({Ok:true})
@@ -155,7 +190,11 @@ module.exports={
     },
 
     async receberPedido(request, response){
-        const {id} = request.params
+        const {id, key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const pedido = await Pedido.update({recebido:1, dt_finalizacao:(new Date())},{where:{id}})
         if(pedido > 0){
             response.status(200).send({Ok:true})
@@ -165,7 +204,11 @@ module.exports={
     },
 
     async reabrir(request, response){
-        const {id} = request.params
+        const {id, key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const pedido = await Pedido.update({entregue:0, dt_finalizacao:''},{where:{id}})
         if(pedido > 0){
             response.status(200).send({Ok:true})

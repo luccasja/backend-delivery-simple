@@ -4,6 +4,12 @@ const { Op } = require("sequelize");
 
 module.exports ={
     async read(request, response){
+        const {key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
+
         const produto = await Produto.findAll()
         if(produto){
             response.status(200).send(produto)
@@ -13,7 +19,11 @@ module.exports ={
     },
 
     async readByPK(request, response){
-        const {id} = request.params
+        const {id, key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const produto = await Produto.findByPk(id)
         if(produto){
             response.status(200).send(produto)
@@ -23,7 +33,11 @@ module.exports ={
     },
 
     async readByName(request, response){
-        const {nome} = request.params
+        const {nome, key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const query = '%'+nome+'%'
         const produto = await Produto.findAll({where:{nome:{[Op.like]:query}}})
         if(produto){
@@ -34,7 +48,11 @@ module.exports ={
     },
 
     async readAtivos(request, response){
-        const {situacao} = request.params
+        const {situacao, key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const produto = await Produto.findAll({where:{ativo:{[Op.eq]:situacao}}})
         if(produto){
             response.status(200).send(produto)
@@ -44,6 +62,11 @@ module.exports ={
     },
 
     async insert(request, response){
+        const {key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const {nome, descricao, valor_unitario, dir_name, ativo} = request.body;
         const produto = await Produto.create({nome, descricao, valor_unitario, dir_name, ativo})
         if(produto){
@@ -54,7 +77,11 @@ module.exports ={
     },
 
     async update(request, response){
-        const {id} = request.params
+        const {id, key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const {nome, descricao, valor_unitario, dir_name, ativo} = request.body;
         const produto = await Produto.update(
             {nome, descricao, valor_unitario, dir_name, ativo}, 
@@ -68,7 +95,11 @@ module.exports ={
     },
 
     async delete(request, response){
-        const {id} = request.params
+        const {id, key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const hasItensPedido = await Item.findAll({where:{id_produto:id}})
         if(hasItensPedido.length === 0){
             const produto = await Produto.destroy({where:{id}})

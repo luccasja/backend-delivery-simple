@@ -3,6 +3,11 @@ const Pedido = require('../models/Pedido')
 
 module.exports = {
     async read(request, response){
+        const {key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const item = await Item.findAll()
         if(item){
             response.status(200).send({item})
@@ -12,7 +17,11 @@ module.exports = {
     },
 
     async readByPedido(request, response){
-        const {id} = request.params
+        const {id, key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const item = await Item.findAll({
             where:{id_pedido:id},
             include:[{association:'produto'}]
@@ -25,7 +34,11 @@ module.exports = {
     },
 
     async insert(request, response){
-        const {id} = request.params
+        const {id, key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const itens = request.body
         let flag
         try {
@@ -54,7 +67,11 @@ module.exports = {
     },
 
     async update(request, response){
-        const {id} = request.params
+        const {id, key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const itens = request.body
 
         let item
@@ -87,7 +104,11 @@ module.exports = {
     },
 
     async delete(request, response){
-        const {id} = request.params
+        const {id, key} = request.params
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const item = await Item.destroy({where:{id_pedido:id}})
         if(item > 0){
             response.status(200).send({OK:true})

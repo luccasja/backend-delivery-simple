@@ -4,8 +4,13 @@ const {Op} = require('sequelize')
 module.exports = {
 
     async auth(request, response){
+        const {key} = request.params
+        //process.env.KEY
+        if(key !== 'ZmluYW1hc3Nh'){
+            response.status(403).send('Acesso restrito!')
+            return
+        }
         const {user, pass} = request.body
-        console.log(request.body)
         const result = await Usuario.findAll({
             where:{
                 user:{
@@ -19,11 +24,9 @@ module.exports = {
         })
 
         if(result.length > 0){
-            
             response.status(200).send({autenticado: true})
             return
         }
-
         response.status(401).send("Usuario não autenticado")
         return
     },

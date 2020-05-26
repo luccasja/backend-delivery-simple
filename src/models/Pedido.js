@@ -6,6 +6,7 @@ class Pedido extends Model{
             nome_cliente: DataTypes.STRING,
             cpf: DataTypes.STRING,
             telefone: DataTypes.STRING,
+            tipo_entrega: DataTypes.INTEGER,
             endereco_entrega: DataTypes.STRING,
             numero_entrega: DataTypes.STRING,
             bairro_entrega: DataTypes.STRING,
