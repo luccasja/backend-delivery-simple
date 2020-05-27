@@ -4,7 +4,7 @@ const { Op } = require("sequelize");
 module.exports={
     async read(request, response){
         const {key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -18,7 +18,7 @@ module.exports={
 
     async readByPk(request, response){
         const {id, key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -32,7 +32,7 @@ module.exports={
 
     async readByDate(request, response){
         const {data_ini, data_fim, key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -49,7 +49,7 @@ module.exports={
 
     async readByDateAll(request, response){
         const {data, key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -63,7 +63,7 @@ module.exports={
 
     async insert(request, response){
         const {key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -112,7 +112,7 @@ module.exports={
 
     async update(request, response){
         const {id, key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -162,7 +162,7 @@ module.exports={
 
     async delete(request, response){
         const {id, key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -177,7 +177,7 @@ module.exports={
 
     async registrarPedido(request, response){
         const {id, key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -191,7 +191,7 @@ module.exports={
 
     async receberPedido(request, response){
         const {id, key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -205,7 +205,7 @@ module.exports={
 
     async reabrir(request, response){
         const {id, key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }

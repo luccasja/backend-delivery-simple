@@ -5,7 +5,7 @@ const { Op } = require("sequelize");
 module.exports ={
     async read(request, response){
         const {key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -20,7 +20,7 @@ module.exports ={
 
     async readByPK(request, response){
         const {id, key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -34,7 +34,7 @@ module.exports ={
 
     async readByName(request, response){
         const {nome, key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -49,7 +49,7 @@ module.exports ={
 
     async readAtivos(request, response){
         const {situacao, key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -63,7 +63,7 @@ module.exports ={
 
     async insert(request, response){
         const {key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -78,7 +78,7 @@ module.exports ={
 
     async update(request, response){
         const {id, key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -96,7 +96,7 @@ module.exports ={
 
     async delete(request, response){
         const {id, key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }

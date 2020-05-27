@@ -4,7 +4,7 @@ const Pedido = require('../models/Pedido')
 module.exports = {
     async read(request, response){
         const {key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -18,7 +18,7 @@ module.exports = {
 
     async readByPedido(request, response){
         const {id, key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -35,7 +35,7 @@ module.exports = {
 
     async insert(request, response){
         const {id, key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -68,7 +68,7 @@ module.exports = {
 
     async update(request, response){
         const {id, key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -105,7 +105,7 @@ module.exports = {
 
     async delete(request, response){
         const {id, key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }

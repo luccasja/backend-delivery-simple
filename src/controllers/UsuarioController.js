@@ -5,8 +5,7 @@ module.exports = {
 
     async auth(request, response){
         const {key} = request.params
-        //process.env.KEY
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }

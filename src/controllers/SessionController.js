@@ -4,7 +4,7 @@ const {Op} = require('sequelize')
 module.exports = {
     async read(request, response){
         const {key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -17,7 +17,7 @@ module.exports = {
 
     async insert(request, response){
         const {situacao, key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -35,7 +35,7 @@ module.exports = {
 
     async update(request, response){
         const {situacao, key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
@@ -48,7 +48,7 @@ module.exports = {
 
     async destroy(request, response){
         const {key} = request.params
-        if(key !== 'ZmluYW1hc3Nh'){
+        if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }

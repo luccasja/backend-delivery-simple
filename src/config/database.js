@@ -1,9 +1,9 @@
 module.exports = {
     dialect: 'mysql',
     host: 'mysql669.umbler.com',
-    username: 'deliverydb',
-    password: 'deliveryapp',
-    database: 'deliverydb',
+    username: 'finamassadb',
+    password: 'finamassaapi',
+    database: 'finamassadb',
     port: 41890,
     define:{
         timestamps: true,
