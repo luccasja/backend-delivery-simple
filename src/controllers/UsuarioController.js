@@ -5,10 +5,12 @@ module.exports = {
 
     async auth(request, response){
         const {key} = request.params
+        /*
         if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
+        */
         const {user, pass} = request.body
         const result = await Usuario.findAll({
             where:{

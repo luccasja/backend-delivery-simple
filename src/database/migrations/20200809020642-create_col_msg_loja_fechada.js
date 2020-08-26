@@ -1,22 +1,22 @@
 'use strict';
 
 module.exports = {
-    up: (queryInterface, Sequelize) => {
+	up: (queryInterface, Sequelize) => {
         return queryInterface.addColumn(
-            'pedidos',
-            'tipo_entrega',
+            'licenciadas',
+            'msg_loja_fechada',
             {
-                type: Sequelize.INTEGER,
+                type: Sequelize.STRING(160),
                 allowNull: true,
-                after: "telefone"
+                after: "msg_agradecimento"
             }
         );
     },
 
     down: (queryInterface, Sequelize) => {
         return queryInterface.removeColumn(
-            'pedidos',
-            'tipo_entrega'
+            'licenciadas',
+            'msg_loja_fechada'
         );
     }
 };

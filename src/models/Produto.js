@@ -8,6 +8,7 @@ class Produto extends Model{
             valor_unitario: DataTypes.DOUBLE,
             ativo: DataTypes.TINYINT,
             dir_img: DataTypes.STRING,
+            fracionado:DataTypes.TINYINT
         },{
             sequelize: connection
         })

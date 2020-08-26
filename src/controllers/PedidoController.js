@@ -4,38 +4,44 @@ const { Op } = require("sequelize");
 module.exports={
     async read(request, response){
         const {key} = request.params
+        /*
         if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
+        */
         const pedido = await Pedido.findAll()
-        if(pedido){
+        if(pedido > 0){
             response.status(200).send(pedido)
             return
         }
-        response.status(400).send({error:"Erro ao ler Pedidos"})
+        response.status(200).send(null)
     },
 
     async readByPk(request, response){
         const {id, key} = request.params
+        /*
         if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
+        */
         const pedido = await Pedido.findByPk(id)
         if(pedido !== null){
             response.status(200).send(pedido)
             return
         }
-        response.status(200).send([])
+        response.status(200).send(null)
     },
 
     async readByDate(request, response){
         const {data_ini, data_fim, key} = request.params
+        /*
         if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
+        */
         const pedidos = await Pedido.findAll({
             where:{created_at:{[Op.gte]:data_ini,[Op.lte]:data_fim}}, 
             order:[['id','DESC']]
@@ -49,10 +55,12 @@ module.exports={
 
     async readByDateAll(request, response){
         const {data, key} = request.params
+        /*
         if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
+        */
         const pedidos = await Pedido.findAll({where:{created_at:{[Op.gte]:data}}})
         if(pedidos){
             response.status(200).send(pedidos)
@@ -63,10 +71,12 @@ module.exports={
 
     async insert(request, response){
         const {key} = request.params
+        /*
         if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
+        */
         const {
             nome_cliente, 
             cpf, 
@@ -112,10 +122,12 @@ module.exports={
 
     async update(request, response){
         const {id, key} = request.params
+        /*
         if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
+        */
         const {
             nome_cliente, 
             cpf, 
@@ -162,10 +174,12 @@ module.exports={
 
     async delete(request, response){
         const {id, key} = request.params
+        /*
         if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
+        */
         const pedido = await Pedido.destroy({where:{id}})
         if(pedido > 0){
             response.status(200).send({OK:true})
@@ -177,10 +191,12 @@ module.exports={
 
     async registrarPedido(request, response){
         const {id, key} = request.params
+        /*
         if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
+        */
         const pedido = await Pedido.update({entregue:1, dt_finalizacao:(new Date())},{where:{id}})
         if(pedido > 0){
             response.status(200).send({Ok:true})
@@ -191,10 +207,12 @@ module.exports={
 
     async receberPedido(request, response){
         const {id, key} = request.params
+        /*
         if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
+        */
         const pedido = await Pedido.update({recebido:1, dt_finalizacao:(new Date())},{where:{id}})
         if(pedido > 0){
             response.status(200).send({Ok:true})
@@ -205,10 +223,12 @@ module.exports={
 
     async reabrir(request, response){
         const {id, key} = request.params
+        /*
         if(key !== process.env.KEY){
             response.status(403).send('Acesso restrito!')
             return
         }
+        */
         const pedido = await Pedido.update({entregue:0, dt_finalizacao:''},{where:{id}})
         if(pedido > 0){
             response.status(200).send({Ok:true})

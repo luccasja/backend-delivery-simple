@@ -3,6 +3,7 @@ const cors = require('cors');
 const routes = require('./routes')
 const socketIO = require('socket.io')
 const http = require('http')
+const path = require('path')
 
 const app = express()
 var corsOptions = {
@@ -35,6 +36,11 @@ io.on('connection', socket =>{
 
 app.use(cors())
 app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+app.use('/public', express.static(path.resolve(__dirname, '..', 'public')));
 app.use(routes)
 
-server.listen(3000)
+
+server.listen(3000,()=>{
+    console.log("Servidor Iniciado na porta 3000")
+})
