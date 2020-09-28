@@ -7,7 +7,7 @@ const path = require('path')
 
 const app = express()
 var corsOptions = {
-    origin: 'https://www.finamassa.online'
+    origin: 'https://meusite.com'
 }
 const server = http.createServer(app)
 
