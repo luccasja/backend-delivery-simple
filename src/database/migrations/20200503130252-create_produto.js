@@ -9,6 +9,13 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
+      id_categoria:{
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references:{model: 'categorias', key: 'id'},
+        onUpdate: 'NO ACTION',
+        onDelete: 'RESTRICT'
+      },
       nome:{
         type: Sequelize.STRING,
         allowNull: false
